@@ -9,5 +9,5 @@
 - run `pip install requirements.txt`(Install all the dependencies in your virtual environment)
 - run `python manage.py runserver`
 
-##Boom you should be live at local host or 127.0.0.1:8000.
+## Boom you should be live at local host or 127.0.0.1:8000.
  
