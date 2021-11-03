@@ -6,7 +6,9 @@
 - run `pip install virtualenv` 
 - Go up one folder and run `virtualenv ENV` (ENV is just the name of the virtual environment that will contain the project's dependencies)
 - run `ENV/Scripts/activate` and cd to the repo again
+    - On Linux/MacOS, the script might be stored in `ENV/bin/activate` instead. You also might have to give execute permission to the file before being able to run it: `chmod +x ENV/bin/activate`
 - run `pip install requirements.txt`(Install all the dependencies in your virtual environment)
+    - If an error pops up about not being able to find the package `requirements.txt`, try running `pip install -r requirements.txt` instead.
 - run `python manage.py runserver`
 
 ## Boom you should be live at local host or 127.0.0.1:8000.
