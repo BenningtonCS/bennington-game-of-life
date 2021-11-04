@@ -1,6 +1,6 @@
 # Bennington Game of Life
 
-###### Rough Steps to deploy on localhost/replicate:
+## Rough Steps to deploy on localhost/replicate:
 - Have python installed
 - clone repo into directory
 - run `pip install virtualenv` 
@@ -11,7 +11,10 @@
     - If an error pops up about not being able to find the package `requirements.txt`, try running `pip install -r requirements.txt` instead.
 - run `python manage.py runserver`
 
-## Boom you should be live at local host or 127.0.0.1:8000.
+###### Boom you should be live at local host or 127.0.0.1:8000.
+
+## How to edit javascript and css files
+For our 'simulation' app, all the front end files we can edit are in the `static` folder. It should be mostly similar to what you're used to.
 
 # Project Goals
 
