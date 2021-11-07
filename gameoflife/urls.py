@@ -17,7 +17,12 @@ from django.contrib import admin
 from django.urls import path
 import simulation.views as sim_views
 
+from simulation import views
+
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
     path(r'', sim_views.IndexView.as_view(), name='index'),
 ]
+
+print(urlpatterns)
