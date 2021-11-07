@@ -5,7 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 function draw() {
-    let step = 20;
+    let step = 25; //how big one square is
     let left = 0.5 - Math.ceil(canvas.width / step) * step;
     let top = 0.5 - Math.ceil(canvas.height / step) * step;
     let right = 2*canvas.width;
@@ -22,6 +22,9 @@ function draw() {
     }
     ctx.strokeStyle = "#888";
     ctx.stroke();
+    ctx.fillStyle = 'red';
+	ctx.fillRect(25, 25, 25, 25);
+
 }
 
 
@@ -34,7 +37,7 @@ const getPos = (e) => ({
 
 const reset = () => {
     start = null;
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
+    //ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
     draw();
 }
 
