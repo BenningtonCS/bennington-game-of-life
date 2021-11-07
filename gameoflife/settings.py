@@ -55,6 +55,7 @@ ROOT_URLCONF = 'gameoflife.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [TEMPLATE_DIR],
         'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -21,3 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', sim_views.IndexView.as_view(), name='index'),
 ]
+
+print(urlpatterns)

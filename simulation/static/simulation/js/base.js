@@ -8,8 +8,8 @@ function draw() {
     let step = 25; //how big one square is
     let left = 0.5 - Math.ceil(canvas.width / step) * step;
     let top = 0.5 - Math.ceil(canvas.height / step) * step;
-    let right = 2*canvas.width;
-    let bottom = 2*canvas.height;
+    let right = 2 * canvas.width;
+    let bottom = 2 * canvas.height;
     ctx.clearRect(left, top, right - left, bottom - top);
     ctx.beginPath();
     for (let x = left; x < right; x += step) {
