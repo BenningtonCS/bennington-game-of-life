@@ -87,7 +87,7 @@ function convertPointsArrayToDict(arr) {
     const out = {};
 
     arr.forEach((point) => {
-        [x, y] = point;
+        const [x, y] = point;
         if (!(x in out)) {
             out[x] = new Set();
         };
@@ -110,10 +110,4 @@ function convertPointsDictToArray(dict) {
     return out;
 }
 
-// at least it's working on the glider
-let state = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
-
-for (let i = 0; i < 10; i++) {
-    console.log(state);
-    state = nextState(state);
-};
+export { nextState, convertPointsArrayToDict, convertPointsDictToArray };

@@ -1,9 +1,14 @@
+import { convertPointsArrayToDict, convertPointsDictToArray, nextState } from './state.js';
+
 //Drawing the infinite canvas grid
 let canvas = document.querySelector('.field');
 let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let state  = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
+
+// input a state then draw it out
 function draw() {
     let step = 25; //how big one square is
     let left = 0.5 - Math.ceil(canvas.width / step) * step;
@@ -23,8 +28,15 @@ function draw() {
     ctx.strokeStyle = "#888";
     ctx.stroke();
     ctx.fillStyle = 'red';
-	ctx.fillRect(25, 25, 25, 25);
 
+    // draw out state
+    convertPointsDictToArray(state).forEach((point) => {
+        const [x, y] = point;
+        ctx.fillRect(x * step, y * step, step, step);
+    });
+
+    // update state
+    // state = nextState(state);
 }
 
 
@@ -59,4 +71,7 @@ canvas.addEventListener("mousemove", e => {
     start = pos;
 });
 
-draw(); // on page load
+// loop on page load
+// let intervalID = setInterval(draw, 100);
+// clearInterval(intervalID);
+draw();
