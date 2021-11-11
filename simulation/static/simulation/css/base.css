@@ -6,4 +6,19 @@ body, html {
     overflow:hidden;
 }
 
-canvas { background: silver; }
+canvas { 
+    background: silver;
+    position: absolute;
+    z-index: 1;
+
+}
+
+.pattern-div {
+    position: absolute;
+    z-index: 2;
+    background: whitesmoke;
+    bottom: 20px;
+    left: 20px;
+    min-width: 300px;
+    border-radius: 5px;
+}
