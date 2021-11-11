@@ -1,5 +1,4 @@
-/* state.js - some functions to manage the state of the game
- */
+/* state.js - some functions to manage the state of the game */
 
 // nextState - given an input of a Dict containing points that are currently alive
 // return the next state of the game
@@ -8,6 +7,7 @@
 // meaning 2 points are considered neighbors if they are 1 away from each other
 //
 // state is a dict, whose keys are the x-coords and vals are a set of y-coords
+
 function nextState(state) {
     // iterate through the points in state
     // generate neighbors and check how many neighbors are also alive

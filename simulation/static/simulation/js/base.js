@@ -72,6 +72,6 @@ canvas.addEventListener("mousemove", e => {
 });
 
 // loop on page load
-// let intervalID = setInterval(draw, 100);
-// clearInterval(intervalID);
+//let intervalID = setInterval(draw, 100);
+//clearInterval(intervalID);
 draw();
