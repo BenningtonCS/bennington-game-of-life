@@ -9,7 +9,12 @@ canvas.height = window.innerHeight;
 let state  = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
 
 // input a state then draw it out
-function draw() {
+function draw(update = true) {
+    // update state
+    if (update == true) {
+        state = nextState(state);
+    };
+
     let step = 25; //how big one square is
     let left = 0.5 - Math.ceil(canvas.width / step) * step;
     let top = 0.5 - Math.ceil(canvas.height / step) * step;
@@ -34,9 +39,6 @@ function draw() {
         const [x, y] = point;
         ctx.fillRect(x * step, y * step, step, step);
     });
-
-    // update state
-    state = nextState(state);
 }
 
 
@@ -50,7 +52,7 @@ const getPos = (e) => ({
 const reset = () => {
     start = null;
     //ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
-    draw();
+    draw(false);
 }
 
 canvas.addEventListener("mousedown", e => {
@@ -67,7 +69,7 @@ canvas.addEventListener("mousemove", e => {
     let pos = getPos(e);
     // Move coordinate system in the same way as the cursor
     ctx.translate(pos.x - start.x, pos.y - start.y);
-    draw();
+    draw(false);
     start = pos;
 });
 
@@ -92,5 +94,6 @@ function pauseGame() {
 
 play_btn.addEventListener("click", playGame);
 pause_btn.addEventListener("click", pauseGame);
-step_btn.addEventListener("click", draw);
+step_btn.addEventListener("click", function() { draw(true) });
+
 draw();

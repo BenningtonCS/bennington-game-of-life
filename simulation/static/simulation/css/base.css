@@ -10,14 +10,12 @@ canvas {
     background: silver;
     position: absolute;
     z-index: 1;
-
 }
 
 .pattern-div, .play-pause-div {
     position: absolute;
     z-index: 2;
     background: whitesmoke;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
@@ -27,11 +25,13 @@ canvas {
     top: 100px;
     min-width: 300px;
     min-height: 600px;
+    padding: 20px;
 }
 
 .play-pause-div {
     left: 50%;
     transform: translateX(-50%);
     bottom: 20px;
-    min-width: 300px;
+    /*min-width: 300px;*/
+    padding: 10px;
 }
