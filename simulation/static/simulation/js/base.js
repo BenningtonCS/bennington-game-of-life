@@ -36,7 +36,7 @@ function draw() {
     });
 
     // update state
-    // state = nextState(state);
+    state = nextState(state);
 }
 
 
@@ -72,6 +72,25 @@ canvas.addEventListener("mousemove", e => {
 });
 
 // loop on page load
-//let intervalID = setInterval(draw, 100);
-//clearInterval(intervalID);
+const pause_btn = document.getElementById('pause-button');
+const play_btn = document.getElementById('play-button');
+const step_btn = document.getElementById('step-button');
+play_btn.style.display = 'none';
+let intervalID = setInterval(draw, 100);
+
+function playGame() {
+    intervalID = setInterval(draw, 100);
+    pause_btn.style.display = 'inline';
+    play_btn.style.display = 'none';
+}
+
+function pauseGame() {
+    clearInterval(intervalID);
+    pause_btn.style.display = 'none';
+    play_btn.style.display = 'inline';
+}
+
+play_btn.addEventListener("click", playGame);
+pause_btn.addEventListener("click", pauseGame);
+step_btn.addEventListener("click", draw);
 draw();

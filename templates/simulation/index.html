@@ -11,12 +11,18 @@
 	<h1>GAME OF LIFE</h1>
 	<canvas class="field"></canvas>
 	<div class="pattern-div">
-		<h1>Patterns</h1>
+		<h1 style="margin: 0px 0px;">Patterns</h1>
 		<ul>
 		{% for pattern in object_list %}
 		    <li>{{ pattern.name }} - {{ pattern.pattern }}</li>
 		{% endfor %}
 		</ul>
+	</div>
+
+	<div class="play-pause-div">
+		<button type="button" id="play-button"> Play </button>
+		<button type="button" id="pause-button">Pause</button>
+		<button type="button" id="step-button">Step</button>
 	</div>
 		
 	<script src="{% static "simulation/js/base.js" %}" type="module" charset="utf-8" async defer></script>

@@ -13,12 +13,25 @@ canvas {
 
 }
 
-.pattern-div {
+.pattern-div, .play-pause-div {
     position: absolute;
     z-index: 2;
     background: whitesmoke;
-    bottom: 20px;
-    left: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pattern-div {
+    right: 20px;
+    top: 100px;
     min-width: 300px;
-    border-radius: 5px;
+    min-height: 600px;
+}
+
+.play-pause-div {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    min-width: 300px;
 }
