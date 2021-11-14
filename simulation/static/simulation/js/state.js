@@ -72,6 +72,21 @@ function nextState(state) {
     return newState;
 };
 
+// flipPoint - given a point's coordinates and a state
+// if the point is within the state, turn it off
+// otherwise, flip it on
+function flipPoint(pointX, pointY, state) {
+    if (pointX in state) {
+        if (state[pointX].has(pointY)) {
+            state[pointX].delete(pointY);
+        } else {
+            state[pointX].add(pointY);
+        }
+    } else {
+        state[pointX] = new Set([pointY]);
+    }
+}
+
 // generateNeighbors - given a point, generate the 8 points neighboring it
 // the points are returned as a list
 // point is represented as a list containing 2 values, its x-coord and y-coord
