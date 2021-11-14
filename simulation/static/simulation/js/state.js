@@ -125,4 +125,4 @@ function convertPointsDictToArray(dict) {
     return out;
 }
 
-export { nextState, convertPointsArrayToDict, convertPointsDictToArray };
+export { nextState, flipPoint, convertPointsArrayToDict, convertPointsDictToArray };
