@@ -6,8 +6,8 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-//state = {}
-let state  = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
+let state = {}
+// let state  = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
 
 //how big one square is
 const step = 25;
@@ -54,7 +54,7 @@ const getPos = (e) => ({
 
 const reset = () => {
     start = null;
-    //ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
+    // ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
     draw(false);
 }
 
@@ -63,14 +63,13 @@ canvas.addEventListener("mousedown", e => {
     start = getPos(e)
 });
 
+// adding point on click
 canvas.addEventListener("click", e => {
-    //window.alert("This seems to be somewhat working.");
     const pos = getPos(e);
-    const posX = pos.x / step;
-    const posY = pos.y / step;
-    //cell = [posX, posY];
-    console.log(posX);
+    const posX = Math.floor(pos.x / step);
+    const posY = Math.floor(pos.y / step);
     flipPoint(posX, posY, state);
+    draw(false); //redraw
 })
 
 canvas.addEventListener("mouseup", reset);
@@ -90,8 +89,11 @@ canvas.addEventListener("mousemove", e => {
 const pause_btn = document.getElementById('pause-button');
 const play_btn = document.getElementById('play-button');
 const step_btn = document.getElementById('step-button');
-play_btn.style.display = 'none';
-let intervalID = setInterval(draw, 100);
+const clear_btn = document.getElementById('clear-button');
+
+// default to pause at start
+pause_btn.style.display = 'none';
+let intervalID;
 
 function playGame() {
     intervalID = setInterval(draw, 100);
@@ -105,8 +107,14 @@ function pauseGame() {
     play_btn.style.display = 'inline';
 }
 
+function clearGame() {
+    state = {};
+    draw(false); //redraw
+}
+
 play_btn.addEventListener("click", playGame);
 pause_btn.addEventListener("click", pauseGame);
 step_btn.addEventListener("click", function() { draw(true) });
+clear_btn.addEventListener("click", clearGame);
 
 draw();

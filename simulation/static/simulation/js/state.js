@@ -81,10 +81,10 @@ function flipPoint(pointX, pointY, state) {
             state[pointX].delete(pointY);
         } else {
             state[pointX].add(pointY);
-        }
+        };
     } else {
         state[pointX] = new Set([pointY]);
-    }
+    };
 }
 
 // generateNeighbors - given a point, generate the 8 points neighboring it
