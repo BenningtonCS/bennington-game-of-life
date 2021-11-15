@@ -113,6 +113,31 @@ function checkKey(e) {
       draw(false);
        // right arrow
     }
+
+    else if (e.keyCode == '87') {
+      gridOffset['y'] += scroll;
+      ctx.translate(0,scroll);
+      draw(false);
+        // w
+    }
+    else if (e.keyCode == '83') {
+      gridOffset['y'] -= scroll;
+      ctx.translate(0,-scroll);
+      draw(false);
+        // down arrow
+    }
+    else if (e.keyCode == '65') {
+      gridOffset['x'] += scroll;
+      ctx.translate(scroll,0);
+      draw(false);
+       // left arrow
+    }
+    else if (e.keyCode == '68') {
+      gridOffset['x'] -= scroll;
+      ctx.translate(-scroll,0);
+      draw(false);
+       // right arrow
+    }
 }
 
 //canvas.addEventListener("mousemove", e => {
