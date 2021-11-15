@@ -6,8 +6,7 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-document.onkeydown = checkKey;
-
+// initial state
 let state = {}
 // let state  = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
 
@@ -65,95 +64,110 @@ const reset = () => {
     draw(false);
 }
 
+let isDrag = false;
+let mouseDownStart = Date.now();
+
 canvas.addEventListener("mousedown", e => {
     reset();
-    start = getPos(e)
+    start = getPos(e);
+
+    // initialize some values for dragging tracking
+    isDrag = false;
+    mouseDownStart = Date.now();
 });
 
-// adding point on click
-canvas.addEventListener("click", e => {
-    const pos = getPos(e);
-    const posX = Math.floor(pos.x/ step  - gridOffset['x']/ step);
-    const posY = Math.floor(pos.y / step - gridOffset['y']/ step);
-    flipPoint(posX, posY, state);
-    draw(false); //redraw
-})
+canvas.addEventListener("mousemove", e => {
+    // Only move the grid when we registered a mousedown event
+    if (!start) return;
+    let pos = getPos(e);
 
-canvas.addEventListener("mouseup", reset);
+    // indicate that the user is dragging if mouse has been moving for more than 0.1s
+    if (Date.now() - mouseDownStart > 100) {
+        isDrag = true;
+    };
+
+    // store grid offset to handle mouse click position after scroll
+    gridOffset['x'] += pos.x - start.x;
+    gridOffset['y'] += pos.y - start.y;
+
+    // Move coordinate system in the same way as the cursor
+    ctx.translate(pos.x - start.x, pos.y - start.y);
+    draw(false);
+    start = pos;
+});
+
+// adding point on mouseup if isDrag = false
+canvas.addEventListener("mouseup", e => {
+    if (!isDrag) {
+        const pos = getPos(e);
+        const posX = Math.floor(pos.x/ step  - gridOffset['x']/ step);
+        const posY = Math.floor(pos.y / step - gridOffset['y']/ step);
+        flipPoint(posX, posY, state);
+    }
+    reset(); // redraw
+});
+
 canvas.addEventListener("mouseleave", reset);
 
 //storing the canvas offset for later use
 let gridOffset = {'x':0, 'y':0};
 
-function checkKey(e) {
+// keystroke movement implementation
+// document.onkeydown = checkKey;
+// function checkKey(e) {
 
-    e = e || window.event;
+//     e = e || window.event;
 
-    if (e.keyCode == '38') {
-      gridOffset['y'] += scroll;
-      ctx.translate(0,scroll);
-      draw(false);
-        // up arrow
-    }
-    else if (e.keyCode == '40') {
-      gridOffset['y'] -= scroll;
-      ctx.translate(0,-scroll);
-      draw(false);
-        // down arrow
-    }
-    else if (e.keyCode == '37') {
-      gridOffset['x'] += scroll;
-      ctx.translate(scroll,0);
-      draw(false);
-       // left arrow
-    }
-    else if (e.keyCode == '39') {
-      gridOffset['x'] -= scroll;
-      ctx.translate(-scroll,0);
-      draw(false);
-       // right arrow
-    }
+//     if (e.keyCode == '38') {
+//       gridOffset['y'] += scroll;
+//       ctx.translate(0,scroll);
+//       draw(false);
+//         // up arrow
+//     }
+//     else if (e.keyCode == '40') {
+//       gridOffset['y'] -= scroll;
+//       ctx.translate(0,-scroll);
+//       draw(false);
+//         // down arrow
+//     }
+//     else if (e.keyCode == '37') {
+//       gridOffset['x'] += scroll;
+//       ctx.translate(scroll,0);
+//       draw(false);
+//        // left arrow
+//     }
+//     else if (e.keyCode == '39') {
+//       gridOffset['x'] -= scroll;
+//       ctx.translate(-scroll,0);
+//       draw(false);
+//        // right arrow
+//     }
 
-    else if (e.keyCode == '87') {
-      gridOffset['y'] += scroll;
-      ctx.translate(0,scroll);
-      draw(false);
-        // w
-    }
-    else if (e.keyCode == '83') {
-      gridOffset['y'] -= scroll;
-      ctx.translate(0,-scroll);
-      draw(false);
-        // down arrow
-    }
-    else if (e.keyCode == '65') {
-      gridOffset['x'] += scroll;
-      ctx.translate(scroll,0);
-      draw(false);
-       // left arrow
-    }
-    else if (e.keyCode == '68') {
-      gridOffset['x'] -= scroll;
-      ctx.translate(-scroll,0);
-      draw(false);
-       // right arrow
-    }
-}
-
-//canvas.addEventListener("mousemove", e => {
-    // Only move the grid when we registered a mousedown event
-//    if (!start) return;
-//    let pos = getPos(e);
-
-//     store grid offset to handle mouse click position after scroll
-//     gridOffset['x'] += pos.x - start.x;
-//     gridOffset['y'] += pos.y - start.y;
-//
-//     // Move coordinate system in the same way as the cursor
-//     ctx.translate(pos.x - start.x, pos.y - start.y);
-//     draw(false);
-//     start = pos;
-// });
+//     else if (e.keyCode == '87') {
+//       gridOffset['y'] += scroll;
+//       ctx.translate(0,scroll);
+//       draw(false);
+//         // w
+//     }
+//     else if (e.keyCode == '83') {
+//       gridOffset['y'] -= scroll;
+//       ctx.translate(0,-scroll);
+//       draw(false);
+//         // down arrow
+//     }
+//     else if (e.keyCode == '65') {
+//       gridOffset['x'] += scroll;
+//       ctx.translate(scroll,0);
+//       draw(false);
+//        // left arrow
+//     }
+//     else if (e.keyCode == '68') {
+//       gridOffset['x'] -= scroll;
+//       ctx.translate(-scroll,0);
+//       draw(false);
+//        // right arrow
+//     }
+// }
 
 // loop on page load
 const pause_btn = document.getElementById('pause-button');
