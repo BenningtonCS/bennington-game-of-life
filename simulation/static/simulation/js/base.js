@@ -6,11 +6,16 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+document.onkeydown = checkKey;
+
 let state = {}
 // let state  = convertPointsArrayToDict([[1,0], [2,1], [0,2], [1,2], [2,2]]);
 
 //how big one square is
 const step = 25;
+
+//how fast we want to scroll
+const scroll = 50;
 
 // input a state then draw it out
 function draw(update = true) {
@@ -80,20 +85,50 @@ canvas.addEventListener("mouseleave", reset);
 //storing the canvas offset for later use
 let gridOffset = {'x':0, 'y':0};
 
-canvas.addEventListener("mousemove", e => {
-    // Only move the grid when we registered a mousedown event
-    if (!start) return;
-    let pos = getPos(e);
-    
-    //store grid offset to handle mouse click position after scroll
-    gridOffset['x'] += pos.x - start.x;
-    gridOffset['y'] += pos.y - start.y;
+function checkKey(e) {
 
-    // Move coordinate system in the same way as the cursor
-    ctx.translate(pos.x - start.x, pos.y - start.y);
-    draw(false);
-    start = pos;
-});
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+      gridOffset['y'] += scroll;
+      ctx.translate(0,scroll);
+      draw(false);
+        // up arrow
+    }
+    else if (e.keyCode == '40') {
+      gridOffset['y'] -= scroll;
+      ctx.translate(0,-scroll);
+      draw(false);
+        // down arrow
+    }
+    else if (e.keyCode == '37') {
+      gridOffset['x'] += scroll;
+      ctx.translate(scroll,0);
+      draw(false);
+       // left arrow
+    }
+    else if (e.keyCode == '39') {
+      gridOffset['x'] -= scroll;
+      ctx.translate(-scroll,0);
+      draw(false);
+       // right arrow
+    }
+}
+
+//canvas.addEventListener("mousemove", e => {
+    // Only move the grid when we registered a mousedown event
+//    if (!start) return;
+//    let pos = getPos(e);
+
+//     store grid offset to handle mouse click position after scroll
+//     gridOffset['x'] += pos.x - start.x;
+//     gridOffset['y'] += pos.y - start.y;
+//
+//     // Move coordinate system in the same way as the cursor
+//     ctx.translate(pos.x - start.x, pos.y - start.y);
+//     draw(false);
+//     start = pos;
+// });
 
 // loop on page load
 const pause_btn = document.getElementById('pause-button');
