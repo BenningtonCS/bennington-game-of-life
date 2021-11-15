@@ -42,6 +42,8 @@ function draw(update = true) {
         const [x, y] = point;
         ctx.fillRect(x * step, y * step, step, step);
     });
+    //When state is empty, pause the game
+    if (Object.keys(state).length === 0) { pauseGame() };
 }
 
 
@@ -66,8 +68,8 @@ canvas.addEventListener("mousedown", e => {
 // adding point on click
 canvas.addEventListener("click", e => {
     const pos = getPos(e);
-    const posX = Math.floor(pos.x / step);
-    const posY = Math.floor(pos.y / step);
+    const posX = Math.floor(pos.x/ step  - gridOffset['x']/ step);
+    const posY = Math.floor(pos.y / step - gridOffset['y']/ step);
     flipPoint(posX, posY, state);
     draw(false); //redraw
 })
@@ -75,10 +77,18 @@ canvas.addEventListener("click", e => {
 canvas.addEventListener("mouseup", reset);
 canvas.addEventListener("mouseleave", reset);
 
+//storing the canvas offset for later use
+let gridOffset = {'x':0, 'y':0};
+
 canvas.addEventListener("mousemove", e => {
     // Only move the grid when we registered a mousedown event
     if (!start) return;
     let pos = getPos(e);
+    
+    //store grid offset to handle mouse click position after scroll
+    gridOffset['x'] += pos.x - start.x;
+    gridOffset['y'] += pos.y - start.y;
+
     // Move coordinate system in the same way as the cursor
     ctx.translate(pos.x - start.x, pos.y - start.y);
     draw(false);
