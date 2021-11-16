@@ -14,7 +14,10 @@
 		<h1 style="margin: 0px 0px;">Patterns</h1>
 		<ul>
 		{% for pattern in object_list %}
-		    <li>{{ pattern.name }} - {{ pattern.pattern }}</li>
+		<div>
+			<button class="load-button" type="button" id="{{ pattern.pattern }}" style="display:inline;">Load</button>
+		    <li style="display:inline;">{{ pattern.name }}</li>
+		</div>
 		{% endfor %}
 		</ul>
 	</div>

@@ -200,5 +200,14 @@ play_btn.addEventListener("click", playGame);
 pause_btn.addEventListener("click", pauseGame);
 step_btn.addEventListener("click", function() { draw(true) });
 clear_btn.addEventListener("click", clearGame);
+const load_buttons = document.getElementsByClassName("load-button")
+console.log(load_buttons);
+for (let button of load_buttons) {
+    button.addEventListener("click", (e) => {
+        state = convertPointsArrayToDict(JSON.parse(button.id));
+        console.log(state);
+        reset();
+    });
+};
 
 draw();
