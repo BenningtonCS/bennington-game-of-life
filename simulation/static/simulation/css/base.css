@@ -12,7 +12,11 @@ body, html {
 }
 
 button {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Bebas Neue', cursive;
+    border-width: 0;
+    background: none;
+    font-size: 22px;
+    color: #0A7ABF;
 }
 canvas { 
     background: #D9AB91;
