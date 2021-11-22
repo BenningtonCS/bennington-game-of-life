@@ -174,6 +174,7 @@ const pause_btn = document.getElementById('pause-button');
 const play_btn = document.getElementById('play-button');
 const step_btn = document.getElementById('step-button');
 const clear_btn = document.getElementById('clear-button');
+const add_btn = document.getElementById('add-button');
 
 // default to pause at start
 pause_btn.style.display = 'none';
@@ -209,5 +210,19 @@ for (let button of load_buttons) {
         reset();
     });
 };
-
+add_btn.addEventListener("click", (e) => {
+   
+    $.ajax({
+        type: "POST",
+        url: "/",
+        data: {
+            'pattern': state
+        },
+        success: function () {
+            console.log(sucess)
+        }
+    });
+    return false;
+});
+      
 draw();

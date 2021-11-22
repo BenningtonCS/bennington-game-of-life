@@ -103,7 +103,7 @@ function convertPointsArrayToDict(arr) {
 
     arr.forEach((point) => {
         const [xstr, ystr] = point;
-        const [x, y] = Number(xstr), Number(ystr);
+        const [x, y] = [Number(xstr), Number(ystr)];
         if (!(x in out)) {
             out[x] = new Set();
         };
