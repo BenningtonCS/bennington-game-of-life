@@ -37,9 +37,9 @@ function draw(update = true) {
         ctx.moveTo(left, y);
         ctx.lineTo(right, y);
     }
-    ctx.strokeStyle = "#888";
+    ctx.strokeStyle = "#b59481";
     ctx.stroke();
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = '#A61F38';
 
     // draw out state
     convertPointsDictToArray(state).forEach((point) => {
@@ -201,25 +201,26 @@ play_btn.addEventListener("click", playGame);
 pause_btn.addEventListener("click", pauseGame);
 step_btn.addEventListener("click", function() { draw(true) });
 clear_btn.addEventListener("click", clearGame);
+
 const load_buttons = document.getElementsByClassName("load-button")
-console.log(load_buttons);
 for (let button of load_buttons) {
     button.addEventListener("click", (e) => {
+        pauseGame()
         state = convertPointsArrayToDict(JSON.parse(button.id));
-        console.log(state);
         reset();
     });
 };
+
 add_btn.addEventListener("click", (e) => {
-   
     $.ajax({
         type: "POST",
         url: "/",
         data: {
+            'name': state,
             'pattern': state
         },
         success: function () {
-            console.log(sucess)
+            console.log("sucess")
         }
     });
     return false;

@@ -8,18 +8,16 @@
 	<link rel="stylesheet" type="text/css" href="{% static "simulation/css/base.css" %}">
 </head>
 <body>
-	<h1>GAME OF LIFE</h1>
+	<h1 class="main-title">GAME OF LIFE</h1>
 	<canvas class="field"></canvas>
 	<div class="pattern-div">
-		<h1 style="margin: 0px 0px;">Patterns</h1>
-		<ul>
+		<h1 style="margin: 0px 0px 10px 0px;">Patterns</h1>
 		{% for pattern in object_list %}
 		<div>
 			<button class="load-button" type="button" id="{{ pattern.pattern }}" style="display:inline;">Load</button>
-		    <li style="display:inline;">{{ pattern.name }}</li>
+		    <p style="display:inline;">{{ pattern.name }}</p>
 		</div>
 		{% endfor %}
-		</ul>
 	</div>
 
 	<div class="play-pause-div">
@@ -29,7 +27,12 @@
         <button type="button" id="clear-button">Clear</button>
 		<button type="button" id="add-button">Add</button>
 	</div>
-		
+
+	<div class="copyright">
+		© 2021 | D. Omar, E. Suberu, Q. Tran, J. Androkae.
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="{% static "simulation/js/base.js" %}" type="module" charset="utf-8" async defer></script>
 </body>
 </html>
